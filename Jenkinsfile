@@ -5,5 +5,6 @@ node {
       echo 'Cloning repository...'
       sh "ls -al"
       sh "git submodule update --init --recursive"
+    }
   }
 }
