@@ -6,5 +6,6 @@ node {
   }
   stage('Check repositories') {
     sh "ls -al"
+    step([$class: 'WsCleanup'])
   }
 }
