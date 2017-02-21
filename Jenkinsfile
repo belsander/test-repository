@@ -1,6 +1,7 @@
 node {
   stage('Setting SSH know_hosts.') {
     echo 'Preparing SSH client for host key validation.'
+    sh 'touch ~/.ssh/known_hosts'
     sh 'ssh-keygen -R \'[airscm]:7999\''
     sh 'ssh-keyscan -t rsa -p 7999 airscm >> ~/.ssh/known_hosts'
   }
