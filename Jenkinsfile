@@ -10,7 +10,7 @@ node {
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: 'ssh://airscm:7999/sm/cb.dev.c']]])
   }
   stage('Rubocop') {
-    step([$class: 'WarningsPublisher', canconsoleParsers: [[parserName: 'Rubocop']]])
+    step([$class: 'WarningsPublisher', consoleParsers: [[parserName: 'Rubocop']]])
   }
   stage('Workspace cleanup.') {
     echo 'Cleaning up workspace directory...'
