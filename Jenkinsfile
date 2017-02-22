@@ -10,10 +10,10 @@ node {
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: 'ssh://airscm:7999/sm/cb.dev.c']]])
   }
   stage('Rubocop test.') {
-    sh 'chef exec rubocop'
+    sh 'chef exec rubocop .'
   }
   stage('Foodcritic test.') {
-    sh 'chef exec foodcritic'
+    sh 'chef exec foodcritic .'
   }
   stage('Workspace cleanup.') {
     echo 'Cleaning up workspace directory...'
