@@ -20,6 +20,6 @@ node {
   }
   stage('Workspace cleanup.') {
     echo 'Cleaning up workspace directory...'
-    step([$class: 'WsCleanup'])
+//    step([$class: 'WsCleanup'])
   }
 }
