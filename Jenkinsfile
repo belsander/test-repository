@@ -1,3 +1,4 @@
+#!groovy
 node {
   stage('Setting SSH know_hosts.') {
     echo 'Preparing SSH client for host key validation.'
