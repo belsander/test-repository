@@ -15,6 +15,9 @@ node {
   stage('Foodcritic test.') {
     sh 'chef exec foodcritic .'
   }
+  stage('Kitchen test.') {
+    sh 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'
+  }
   stage('Workspace cleanup.') {
     echo 'Cleaning up workspace directory...'
     step([$class: 'WsCleanup'])
