@@ -32,7 +32,6 @@ stage('Foodcritic test.') {
 stage('Kitchen test.') {
   node {
     echo 'Running kitchen test.'
-    #sh([script: 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'])
   }
 }
 
