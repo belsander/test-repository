@@ -34,12 +34,13 @@ stage('Kitchen test.') {
     echo 'Running kitchen test.'
     sh([script: 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'])
   }
-}
-
-stage('Archive artifacts.') {
-  node {
-    echo 'Archiving artifacts in Jenkins.'
-    step([$class: 'ArtifactArchive', artifacts: 'Berksfile metadata.rb', fingerprint: true])
+  post {
+    success {
+      echo 'Archiving artifacts in Jenkins.'
+      step([$class: 'ArtifactArchive', artifacts: 'Berksfile,metadata.rb', fingerprint: true])
+    }
+    failure {
+      echo 'Test failed, not archiving artifacts.'
   }
 }
 
