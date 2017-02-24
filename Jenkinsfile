@@ -7,20 +7,23 @@ node {
     sh([script: 'ssh-keyscan -t rsa -p 7999 airscm >> ~/.ssh/known_hosts'])
   }
   stage('Clone repositories.') {
-    echo 'Cloning repository and tracking submodules by head of branch...'
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: 'ssh://airscm:7999/sm/cb.dev.c']]])
+    echo 'Cloning repository and tracking submodules by head of branch.'
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], submoduleCfg: [], userRemoteConfigs: [[url: 'ssh://git@airscm:7999/sm/cb.dev.c']]])
   }
   stage('Rubocop test.') {
+    echo 'Running Rubocop test.'
     sh([script: 'chef exec rubocop .'])
   }
   stage('Foodcritic test.') {
+    echo 'Running Foodcritic test.'
     sh([script: 'chef exec foodcritic .'])
   }
   stage('Kitchen test.') {
+    echo 'Running kitchen test.'
     sh([script: 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'])
   }
   stage('Workspace cleanup.') {
-    echo 'Cleaning up workspace directory...'
+    echo 'Cleaning up workspace directory.'
     step([$class: 'WsCleanup'])
   }
 }
