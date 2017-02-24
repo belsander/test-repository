@@ -36,6 +36,13 @@ stage('Kitchen test.') {
   }
 }
 
+stage('Archive artifacts.') {
+  node {
+    echo 'Archiving artifacts in Jenkins.'
+    step([$class: 'ArtifactArchive', artifacts: 'Berksfile metadata.rb', fingerprint: true])
+  }
+}
+
 stage('Workspace cleanup.') {
   node {
     echo 'Cleaning up workspace directory.'
