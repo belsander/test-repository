@@ -42,6 +42,7 @@ post {
   }
   failure {
     echo 'Test failed, not archiving artifacts.'
+  }
 }
 
 stage('Workspace cleanup.') {
