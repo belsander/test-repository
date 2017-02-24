@@ -26,4 +26,12 @@ node {
     echo 'Cleaning up workspace directory.'
     step([$class: 'WsCleanup'])
   }
+  publishHTML (target: [
+      allowMissing: false,
+      alwaysLinkToLastBuild: false,
+      keepAll: true,
+      reportDir: 'coverage',
+      reportFiles: 'index.html',
+      reportName: "RCov Report"
+    ])
 }
