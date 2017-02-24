@@ -1,10 +1,12 @@
 #!groovy
 stage('Setting SSH know_hosts.') {
   node {
-    echo 'Preparing SSH client for host key validation.'
-    sh([script: 'touch ~/.ssh/known_hosts'])
-    sh([script: 'ssh-keygen -R \'[airscm]:7999\''])
-    sh([script: 'ssh-keyscan -t rsa -p 7999 airscm >> ~/.ssh/known_hosts'])
+    steps {
+      echo 'Preparing SSH client for host key validation.'
+      sh([script: 'touch ~/.ssh/known_hosts'])
+      sh([script: 'ssh-keygen -R \'[airscm]:7999\''])
+      sh([script: 'ssh-keyscan -t rsa -p 7999 airscm >> ~/.ssh/known_hosts'])
+    }
   }
 }
 
