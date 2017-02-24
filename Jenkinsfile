@@ -39,7 +39,7 @@ stage('Kitchen test.') {
 stage('Archive artifacts.') {
   node {
     echo 'Archiving artifacts in Jenkins.'
-    step([$class: 'ArtifactArchive', artifacts: 'Berksfile', fingerprint: true])
+    archive('Berksfile')
   }
 }
 
