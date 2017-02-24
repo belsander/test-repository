@@ -1,6 +1,6 @@
 #!groovy
 stage('Setting SSH know_hosts.') {
-  node {
+  node('master') {
     echo 'Preparing SSH client for host key validation.'
     sh([script: 'touch ~/.ssh/known_hosts'])
     sh([script: 'ssh-keygen -R \'[airscm]:7999\''])
