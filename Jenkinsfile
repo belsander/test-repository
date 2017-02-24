@@ -41,6 +41,7 @@ stage('Kitchen test.') {
     }
     failure {
       echo 'Test failed, not archiving artifacts.'
+    }
   }
 }
 
