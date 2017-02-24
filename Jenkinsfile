@@ -32,15 +32,13 @@ stage('Foodcritic test.') {
 stage('Kitchen test.') {
   node {
     echo 'Running kitchen test.'
-    post {
-      success {
-        echo 'Archiving artifacts in Jenkins.'
-        step([$class: 'ArtifactArchive', artifacts: 'Berksfile,metadata.rb', fingerprint: true])
-      }
-      failure {
-        echo 'Test failed, not archiving artifacts.'
-      }
-    }
+  }
+}
+
+stage('Archive artifacts.') {
+  node {
+    echo 'Archiving artifacts in Jenkins.'
+    step([$class: 'ArtifactArchive', artifacts: 'Berksfile,metadata.rb', fingerprint: true])
   }
 }
 
