@@ -11,20 +11,12 @@ stage('Tests.') {
       echo 'Running Foodcritic test.'
       sh([script: 'chef exec foodcritic .'])
     }
-  }
-}
-
-stage('Kitchen test.') {
-  node {
-    echo 'Running kitchen test.'
-    sh([script: 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'])
-  }
-}
-
-stage('Archive artifacts.') {
-  node {
-    echo 'Archiving artifacts in Jenkins.'
-    archive('Berksfile')
+  },
+  kitchen-test: {
+    node {
+      echo 'Running kitchen test.'
+      sh([script: 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'])
+    }
   }
 }
 
