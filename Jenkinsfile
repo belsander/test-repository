@@ -12,7 +12,7 @@ stage('Tests.') {
       sh([script: 'chef exec foodcritic .'])
     }
   },
-  kitchen-test: {
+  kitchentest: {
     node {
       echo 'Running kitchen test.'
       sh([script: 'chef exec kitchen test --log-level=info --concurrency=6 --destroy=always'])
