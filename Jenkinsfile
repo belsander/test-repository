@@ -1,15 +1,16 @@
 #!groovy
-stage('Rubocop test.') {
-  node {
-    echo 'Running Rubocop test.'
-    sh([script: 'chef exec rubocop .'])
-  }
-}
-
-stage('Foodcritic test.') {
-  node {
-    echo 'Running Foodcritic test.'
-    sh([script: 'chef exec foodcritic .'])
+stage('Tests.') {
+  parallel rubocop: {
+    node {
+      echo 'Running Rubocop test.'
+      sh([script: 'chef exec rubocop .'])
+    }
+  },
+  foodcritic: {
+    node {
+      echo 'Running Foodcritic test.'
+      sh([script: 'chef exec foodcritic .'])
+    }
   }
 }
 
